@@ -1,0 +1,20 @@
+#!/bin/bash
+clear
+echo -en "*Target - $1: Full scan results:* "
+IP=$1
+echo -e "\e[93mScanning...\e[0m"
+
+nmap -oG - $IP | grep -E 'Ports'
+nmap -oG - $IP | grep -E 'Ports' > tmp_scan1
+
+while true
+	do
+		diff <( cat tmp_scan1 ) <( nmap -oG - "$IP" | grep -E 'Ports' ) > /dev/null
+	if [ $? -ne 0 ]
+       	then
+		clear
+       		echo *Target - $1: new records found in the last scan
+		nmap -oG - $IP | grep -E 'Ports'	
+		nmap -oG - $IP | grep -E 'Ports' > tmp_scan1 > /dev/null
+    	fi
+done 
