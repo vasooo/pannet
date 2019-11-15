@@ -32,6 +32,15 @@ $ python getweather.py
 source=openweathermap, city="Honolulu", description="few clouds", temp=70.2,
 humidity=75
 ```
+Steps: 
+Declare environment variables *OPENWEATHER_API_KEY* and *CITY_NAME* by sourcing env_var.
+```
+$ source ./env_var
+```
+Run program to show weather in requested location.
+```
+$ ./getweather.py
+```
 Ansible
 
 All steps below must be done using Ansible:
@@ -40,6 +49,7 @@ All steps below must be done using Ansible:
 NOTE: Settings for privilege escalation and modularisation are acceptable ( become: yes ,
 ansible-roles , etc)
 Example of expected result:
+
 ```
 $ docker
 The program 'docker' is currently not installed. You can install it by typing:sudo apt install docker.io
@@ -69,6 +79,21 @@ weather:dev
 $ grep openweathermap /var/log/syslog
 Nov 30 11:50:07 ubuntu-vm ae9395e86676[1621]: source=openweathermap,
 city="Honolulu", description="few clouds", temp=70.2, humidity=75
+```
+Steps:
+
+Execute playbook to install *Docker* service on Ubuntu 18.04 and enable container logging to Docker host *syslog* file.
+
+```
+$ ansible-playbook -i "localhost," -c local site.yml --ask-become-pass
+```
+Run the docker image.
+```
+$ docker run --rm -e OPENWEATHER_API_KEY="aa1ab6974298fc6bf7303d6a22e073f9" -e CITY_NAME="Honolulu" weather:dev
+```
+Check the output log`/var/log/syslog`
+```
+$ grep openweathermap /var/log/syslog
 ```
 
 # Exercise 2:
@@ -107,6 +132,14 @@ scan results:*
 25/open/tcp////
 80/open/tcp////
 ```
+
+Steps:
+Single host scan you need to provide host or ip for scan.
+
+```
+$ ./scanner 1.1.1.1
+
+```
 # Exercise 3:
 
 Syslog configuration
@@ -126,9 +159,26 @@ Example of expected result:
  proper contents of /etc/rsyslog.d/ folder
  logs properly delivered to external syslog server
 
-Evaluation
+Steps:
+
+For configuration *logging only default log files* run
+```
+$ ansible-playbook -i "localhost" -c local log-local.yml --ask-become-pass
+```
+For configuration *logging custom files* run
+```
+$ ansible-playbook -i "localhost" -c local log-custom.yml --ask-become-pass
+```
+For configuration *selecting external log server to send logs run
+```
+ansible-playbook -i "localhost" -c local log-remote.yml --ask-become-pass
+```
+
+# Evaluation
+
 Candidate selects the amount of exercises to elaborate. In case not full scope of the exercise is
 delivered, we ask candidate to mention gaps and applied workarounds.
 Results - Source Code & Readme-s
+
 All material used for this exercise should be uploaded to Github and the repository shared.References
 [1] https://docs.docker.com/engine/admin/logging/overview/#configure-the-default-logging-driver
