@@ -24,7 +24,7 @@ Create a simple python script getweather.py with the following specs
 
 It outputs to stdout
 Example of acceptable results:
-
+```
 $ export
 declare -x OPENWEATHER_API_KEY="xxxxxxxxxxxx"
 declare -x CITY_NAME="Honolulu"
