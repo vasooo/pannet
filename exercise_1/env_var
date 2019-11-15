@@ -1,0 +1,2 @@
+export OPENWEATHER_API_KEY="aa1ab6974298fc6bf7303d6a22e073f9"
+export CITY_NAME="Honolulu"
