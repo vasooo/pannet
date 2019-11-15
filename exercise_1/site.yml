@@ -45,7 +45,6 @@
           path: .
           args:
             dockerfile: Dockerfile
-#            listen_port: 6000
         source: build
 
     # Creates the number of containers defined by the variable create_containers, using default values
