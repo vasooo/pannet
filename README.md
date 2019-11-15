@@ -115,14 +115,17 @@ Configure rsyslog service with the following settings:
  logging of custom log files
 
 Ansible
+
 Configuration must be executed using Ansible utilizing concept of Ansible roles. Ansible role should
 accept the following parameters:
  logging only default log files
  logging custom files
  selecting external log server to send logs to
+
 Example of expected result:
  proper contents of /etc/rsyslog.d/ folder
  logs properly delivered to external syslog server
+
 Evaluation
 Candidate selects the amount of exercises to elaborate. In case not full scope of the exercise is
 delivered, we ask candidate to mention gaps and applied workarounds.
