@@ -1,28 +1,37 @@
 # pannet
 
 Environment
+
 Spawn a Ubuntu 16.04 virtual machine - you can use readily available VMware/VirtualBox/Parallels
+
 VMs for this purpose. You can use Vagrant.
-Exercise 1:
+
+# Exercise 1:
+
 Programming
+
 NOTE: Although below Python is mentioned, any of the following programming languages are
 accepted: Python, Ruby, Golang, C/C++, Java.
 Create a simple python script getweather.py with the following specs
-● Retrieves weather data from https://openweathermap.org/api
-● It uses the current weather data API: https://openweathermap.org/current
-● It uses pyown: https://pypi.python.org/pypi/pyowm
-● The python script uses no arguments, only the following environment variables:
-●
-❍ OPENWEATHER_API_KEY
-❍ CITY_NAME
+
+ Retrieves weather data from https://openweathermap.org/api
+ It uses the current weather data API: https://openweathermap.org/current
+ It uses pyown: https://pypi.python.org/pypi/pyowm
+ The python script uses no arguments, only the following environment variables:
+
+ OPENWEATHER_API_KEY
+ CITY_NAME
+
 It outputs to stdout
 Example of acceptable results:
+
 $ export
 declare -x OPENWEATHER_API_KEY="xxxxxxxxxxxx"
 declare -x CITY_NAME="Honolulu"
 $ python getweather.py
 source=openweathermap, city="Honolulu", description="few clouds", temp=70.2,
 humidity=75
+```
 Ansible
 All steps below must be done using Ansible:
 ● Install the Docker service
