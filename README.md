@@ -33,12 +33,14 @@ source=openweathermap, city="Honolulu", description="few clouds", temp=70.2,
 humidity=75
 ```
 Ansible
+
 All steps below must be done using Ansible:
-● Install the Docker service
-● Enable container logging to Docker host's syslog file [1]
+ Install the Docker service
+ Enable container logging to Docker host's syslog file [1]
 NOTE: Settings for privilege escalation and modularisation are acceptable ( become: yes ,
 ansible-roles , etc)
 Example of expected result:
+```
 $ docker
 The program 'docker' is currently not installed. You can install it by typing:sudo apt install docker.io
 $ ansible-playbook -i "localhost," -c local site.yml
@@ -54,25 +56,34 @@ Docker version 17.12.0-ce, build c97c6d6
 $ docker info | grep 'Logging Driver'
 Logging Driver: syslog
 failed=0
+```
 Docker
-● Build a docker image ( Dockerfile ) configured to run as executable
-● The docker container should pack the getweather.py script
+
+ Build a docker image ( Dockerfile ) configured to run as executable
+ The docker container should pack the getweather.py script
+
 Example of expected result:
+```
 $ docker run --rm -e OPENWEATHER_API_KEY="xxxxxxxxxxxx" -e CITY_NAME="Honolulu"
 weather:dev
 $ grep openweathermap /var/log/syslog
 Nov 30 11:50:07 ubuntu-vm ae9395e86676[1621]: source=openweathermap,
 city="Honolulu", description="few clouds", temp=70.2, humidity=75
-Exercise 2:
+```
+
+# Exercise 2:
+
 Programming
 Build a program (in any language) for repetitive network scans displaying differences between
 subsequent scans.
-●
-scan can be executed either using external tools or using dedicated libraries of selected
+
+ scan can be executed either using external tools or using dedicated libraries of selected
 programming language
-● target of the scan must be parametrized as CLI argument
-● target can be single IP address as well as network range
+ target of the scan must be parametrized as CLI argument
+ target can be single IP address as well as network range
+
 Example of expected result:
+```
 Initial scan:
 $ ./scanner 10.1.1.1
 *Target - 10.1.1.1: Full scan results:*
@@ -95,20 +106,23 @@ scan results:*
 22/open/tcp////
 25/open/tcp////
 80/open/tcp////
-Exercise 3:
+```
+# Exercise 3:
+
 Syslog configuration
 Configure rsyslog service with the following settings:
-● logging of default log files from /var/log/*
-● logging of custom log files
+ logging of default log files from /var/log/*
+ logging of custom log files
+
 Ansible
 Configuration must be executed using Ansible utilizing concept of Ansible roles. Ansible role should
 accept the following parameters:
-● logging only default log files
-● logging custom files
-● selecting external log server to send logs to
+ logging only default log files
+ logging custom files
+ selecting external log server to send logs to
 Example of expected result:
-● proper contents of /etc/rsyslog.d/ folder
-● logs properly delivered to external syslog server
+ proper contents of /etc/rsyslog.d/ folder
+ logs properly delivered to external syslog server
 Evaluation
 Candidate selects the amount of exercises to elaborate. In case not full scope of the exercise is
 delivered, we ask candidate to mention gaps and applied workarounds.
